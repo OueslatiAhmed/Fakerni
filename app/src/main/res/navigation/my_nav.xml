@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="tn.esprit.fakerni.HomePageFragment"
+        android:name="tn.esprit.fakerni.Controller.HomePageFragment"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="tn.esprit.fakerni.SettingsFragment"
+        android:name="tn.esprit.fakerni.Controller.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="tn.esprit.fakerni.SearchFragment"
+        android:name="tn.esprit.fakerni.Controller.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="tn.esprit.fakerni.NotificationFragment"
+        android:name="tn.esprit.fakerni.Controller.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/addFragment"
-        android:name="tn.esprit.fakerni.AddFragment"
+        android:name="tn.esprit.fakerni.Controller.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
 </navigation>

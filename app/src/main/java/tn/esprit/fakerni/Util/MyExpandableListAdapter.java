@@ -3,7 +3,9 @@ package tn.esprit.fakerni.Util;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +25,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> groupList;
 
     public MyExpandableListAdapter(Context context, List<String> groupList,
-                                   Map<String, List<String>> mobileCollection){
+                                   Map<String, List<String>> taskCollection){
         this.context = context;
-        this.taskCollection = mobileCollection;
+        this.taskCollection = taskCollection;
         this.groupList = groupList;
     }
 
@@ -66,14 +68,23 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        String taskName = getGroup(i).toString();
+        String level = getGroup(i).toString();
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.group_task, null);
         }
         TextView item = view.findViewById(R.id.task);
         item.setTypeface(null, Typeface.BOLD);
-        item.setText(taskName);
+        item.setText(level);
+        if (level.equals("Urgent")) {
+            item.setTextColor(Color.RED);
+        }
+        else if (level.equals("High")) {
+            item.setTextColor(Color.YELLOW);
+        }
+        else if (level.equals("Low")) {
+            item.setTextColor(Color.BLUE);
+        }
         return view;
     }
 
@@ -86,7 +97,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView item = view.findViewById(R.id.txtTask);
       //  ImageView delete = view.findViewById(R.id.delete);
+
         item.setText(model);
+
        /* delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

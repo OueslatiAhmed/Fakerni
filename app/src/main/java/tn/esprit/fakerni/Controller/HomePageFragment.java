@@ -105,47 +105,35 @@ public class HomePageFragment extends Fragment {
     }
 
     private void createCollection() {
-        String[] samsungModels = {"Samsung Galaxy M21", "Samsung Galaxy F41",
+        String[] urgent = {"Samsung Galaxy M21", "Samsung Galaxy F41",
                 "Samsung Galaxy M51", "Samsung Galaxy A50s"};
-        String[] googleModels = {"Pixel 4 XL", "Pixel 3a", "Pixel 3 XL", "Pixel 3a XL",
+        String[] high = {"Pixel 4 XL", "Pixel 3a", "Pixel 3 XL", "Pixel 3a XL",
                 "Pixel 2", "Pixel 3"};
-        String[] redmiModels = {"Redmi 9i", "Redmi Note 9 Pro Max", "Redmi Note 9 Pro"};
-        String[] vivoModels = {"Vivo V20", "Vivo S1 Pro", "Vivo Y91i", "Vivo Y12"};
-        String[] nokiaModels = {"Nokia 5.3", "Nokia 2.3", "Nokia 3.1 Plus"};
-        String[] motorolaModels = { "Motorola One Fusion+", "Motorola E7 Plus", "Motorola G9"};
+        String[] low = {"Redmi 9i", "Redmi Note 9 Pro Max", "Redmi Note 9 Pro"};
         taskCollection = new HashMap<String, List<String>>();
         for(String group : groupList){
-            if (group.equals("Samsung")){
-                loadChild(samsungModels);
-            } else if (group.equals("Google"))
-                loadChild(googleModels);
-            else if (group.equals("Redmi"))
-                loadChild(redmiModels);
-            else if (group.equals("Vivo"))
-                loadChild(vivoModels);
-            else if (group.equals("Nokia"))
-                loadChild(nokiaModels);
-            else
-                loadChild(motorolaModels);
+            if (group.equals("Urgent")){
+                loadChild(urgent);
+            } else if (group.equals("High"))
+                loadChild(high);
+            else if (group.equals("Low"))
+                loadChild(low);
             taskCollection.put(group, childList);
         }
     }
 
-    private void loadChild(String[] mobileModels) {
+    private void loadChild(String[] taskModels) {
         childList = new ArrayList<>();
-        for(String model : mobileModels){
+        for(String model : taskModels){
             childList.add(model);
         }
     }
 
     private void createGroupList() {
         groupList = new ArrayList<>();
-        groupList.add("Samsung");
-        groupList.add("Google");
-        groupList.add("Redmi");
-        groupList.add("Vivo");
-        groupList.add("Nokia");
-        groupList.add("Motorola");
+        groupList.add("Urgent");
+        groupList.add("High");
+        groupList.add("Low");
     }
 
 }

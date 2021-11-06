@@ -4,5 +4,5 @@
     <item android:id="@+id/searchFragment" android:title="" android:icon="@drawable/ic_search"/>
     <item android:id="@+id/addFragment" android:title="" android:icon="@drawable/ic_add"/>
     <item android:id="@+id/notificationFragment" android:title="" android:icon="@drawable/ic_notifications"/>
-    <item android:id="@+id/settingsFragment" android:title="" android:icon="@drawable/ic_settings"/>
+    <item android:id="@+id/settingsFragment_2" android:title="" android:icon="@drawable/ic_settings"/>
 </menu>                                                                                 

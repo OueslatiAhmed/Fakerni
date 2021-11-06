@@ -30,4 +30,8 @@
         android:name="tn.esprit.fakerni.Controller.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
+    <fragment
+        android:id="@+id/settingsFragment_2"
+        android:name="tn.esprit.fakerni.Controller.SettingsFragment_2"
+        android:label="SettingsFragment_2" />
 </navigation>

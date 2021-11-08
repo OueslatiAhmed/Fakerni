@@ -1,43 +1,42 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header"
-        app:iconSpaceReserved="false"
-        >
+    <PreferenceCategory app:title="@string/general_header"
+        app:iconSpaceReserved="false">
 
-        <EditTextPreference
+        <ListPreference
             app:iconSpaceReserved="false"
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
+            app:key="theme"
+            app:title="@string/theme_title"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
+            app:defaultValue="light_mode"
+            app:useSimpleSummaryProvider="true"/>
 
         <ListPreference
             app:iconSpaceReserved="false"
 
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
+            app:defaultValue="en"
+            app:entries="@array/language_entries"
+            app:entryValues="@array/language_values"
+            app:key="language"
+            app:title="@string/language_title"
+            app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:title="@string/sync_header">
+        app:title="@string/security_header">
 
-        <SwitchPreferenceCompat
+        <ListPreference
             app:iconSpaceReserved="false"
-            app:key="sync"
-            app:title="@string/sync_title" />
+            app:key="fingerprint"
+            app:title="@string/fingerprint_title"
+            app:entries="@array/fingerprint_entries"
+            app:entryValues="@array/fingerprint_values"
+            app:defaultValue="off"
+            app:useSimpleSummaryProvider="true"/>
 
-        <SwitchPreferenceCompat
-            app:iconSpaceReserved="false"
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
 
     </PreferenceCategory>
 

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Fakerni</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Bonjour fragment vierge</string>
+    <!-- Preference Titles -->
+    <string name="general_header">Générale</string>
+    <string name="security_header">Sécurité</string>
+
+    <!-- General Preferences -->
+    <string name="theme_title">Thème</string>
+    <string name="language_title">Langue</string>
+
+    <!-- security Preferences -->
+    <string name="fingerprint_title">Empreinte digitale</string>
+</resources>

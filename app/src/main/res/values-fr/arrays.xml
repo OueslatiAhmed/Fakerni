@@ -1,0 +1,34 @@
+<resources>
+    <!-- Theme -->
+    <string-array name="theme_entries">
+        <item>Mode lumière</item>
+        <item>Mode sombre</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>light_mode</item>
+        <item>dark_mode</item>
+    </string-array>
+
+    <!-- Language -->
+    <string-array name="language_entries">
+        <item>Anglais</item>
+        <item>Français</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>en</item>
+        <item>fr</item>
+    </string-array>
+
+    <!-- Fingerprint -->
+    <string-array name="fingerprint_entries">
+        <item>Activé</item>
+        <item>Désactivé</item>
+    </string-array>
+
+    <string-array name="fingerprint_values">
+        <item>on</item>
+        <item>off</item>
+    </string-array>
+</resources>

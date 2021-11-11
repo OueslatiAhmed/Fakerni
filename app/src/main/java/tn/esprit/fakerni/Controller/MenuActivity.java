@@ -61,7 +61,7 @@ public class MenuActivity extends AppCompatActivity implements SharedPreferences
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
-                        R.string.authentication_succeeded, Toast.LENGTH_SHORT).show();
+                        getString(R.string.authentication_succeeded), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -78,8 +78,6 @@ public class MenuActivity extends AppCompatActivity implements SharedPreferences
                 .setNegativeButtonText(getString(R.string.finger_negative))
                 .build();
 
-        biometricPrompt.authenticate(promptInfo);
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this,  R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
@@ -94,6 +92,10 @@ public class MenuActivity extends AppCompatActivity implements SharedPreferences
         theme = mPreferences.getString("theme", "light_mode");
         language = mPreferences.getString("language", "en");
         fingerprint = mPreferences.getString("fingerprint", "off");
+
+        if(fingerprint.equals("on")) {
+            biometricPrompt.authenticate(promptInfo);
+        }
 
         switch (theme) {
             case "light_mode":

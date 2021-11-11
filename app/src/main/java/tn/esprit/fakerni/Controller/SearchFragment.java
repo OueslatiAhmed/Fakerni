@@ -7,6 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import androidx.appcompat.widget.SearchView;
+
+import java.util.ArrayList;
 
 import tn.esprit.fakerni.R;
 
@@ -16,6 +21,12 @@ import tn.esprit.fakerni.R;
  * create an instance of this fragment.
  */
 public class SearchFragment extends Fragment {
+
+    SearchView mySearchView;
+    ListView myList;
+
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +72,36 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View v = inflater.inflate(R.layout.fragment_search, container, false);
+
+        mySearchView = v.findViewById(R.id.searchView);
+        myList = v.findViewById(R.id.myList);
+
+        list = new ArrayList<String>();
+
+        list.add("scarrraa");
+        list.add("bqkdqd");
+        list.add("ccakaks");
+        list.add("ewqeqkk");
+        list.add("eeeeqqss");
+        list.add("oqwejdadaskd jnj blqblqblq");
+
+        adapter = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_list_item_1, list);
+        myList.setAdapter(adapter);
+
+        mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return v;
     }
 }

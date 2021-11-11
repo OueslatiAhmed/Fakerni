@@ -7,8 +7,6 @@ import androidx.biometric.BiometricPrompt;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;

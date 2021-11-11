@@ -24,4 +24,7 @@
     <string name="level_high">Haut</string>
     <string name="level_low">Faible</string>
 
+    <!-- Search Fragment -->
+    <string name="query_hint">Cherche ici</string>
+
 </resources>

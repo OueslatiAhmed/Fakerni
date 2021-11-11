@@ -1,5 +1,12 @@
 package tn.esprit.fakerni.Controller;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +14,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import tn.esprit.fakerni.Entity.Notification;
 import tn.esprit.fakerni.R;
+import tn.esprit.fakerni.Util.ReminderBroadcast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +27,7 @@ import tn.esprit.fakerni.R;
  * create an instance of this fragment.
  */
 public class AddFragment extends Fragment {
+    Button button;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +73,37 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add, container, false);
+        View v = inflater.inflate(R.layout.fragment_add, container, false);
+        createNotificationChannel(v.getContext());
+
+        button = v.findViewById(R.id.btnTest);
+        button.setOnClickListener(v1 -> {
+            Toast.makeText(v.getContext(), "Reminder set", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getActivity(), ReminderBroadcast.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(v.getContext(), 0, intent, 0);
+
+            AlarmManager alarmManager = (AlarmManager) v.getContext().getSystemService(Context.ALARM_SERVICE);
+
+            long time0 = System.currentTimeMillis();
+
+            long time = 1000;
+
+            alarmManager.set(AlarmManager.RTC_WAKEUP, time0 + time, pendingIntent);
+        });
+        return v;
+    }
+
+    private void createNotificationChannel(Context context) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "LembitReminderChannel";
+            String description = "Channel for Lemubit Reminder";
+            int importation = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyLembit", name, importation);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }

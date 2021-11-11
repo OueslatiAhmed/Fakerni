@@ -13,9 +13,9 @@ import tn.esprit.fakerni.R;
 public class ReminderBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        int notificationId = 200;
-        String contentTitle = "";
-        String contentText = "";
+        int notificationId = intent.getExtras().getInt("NOTIFICATION_ID");
+        String contentTitle = intent.getExtras().getString("CONTENT_TITLE");
+        String contentText = intent.getExtras().getString("CONTENT_TEXT");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyLembit")
                 .setSmallIcon(R.drawable.ic_alert_24dp)
                 .setContentTitle(contentTitle)

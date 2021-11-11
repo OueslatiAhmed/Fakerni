@@ -3,12 +3,23 @@ package tn.esprit.fakerni.Controller;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tn.esprit.fakerni.Dao.NotificationDao;
+import tn.esprit.fakerni.Entity.Notification;
 import tn.esprit.fakerni.R;
+import tn.esprit.fakerni.Util.AppDatabase;
+import tn.esprit.fakerni.Util.MyRecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +27,11 @@ import tn.esprit.fakerni.R;
  * create an instance of this fragment.
  */
 public class NotificationFragment extends Fragment {
+
+    AppDatabase db;
+
+    RecyclerView recyclerView;
+    ArrayList<String> s1, s2;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +77,32 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        View v = inflater.inflate(R.layout.fragment_notification, container, false);
+        db = Room.databaseBuilder(v.getContext().getApplicationContext(),
+                AppDatabase.class, "database-name").allowMainThreadQueries().build();
+        s1 = new ArrayList<String>();
+        s2 = new ArrayList<String>();
+
+        loadData(s1, s2);
+
+        recyclerView = v.findViewById(R.id.myRecyclerView);
+
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(v.getContext(), s1, s2);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
+
+        return v;
+    }
+
+    private void loadData(ArrayList<String> ss1, ArrayList<String> ss2) {
+        NotificationDao notificationDao = db.notificationDao();
+        List<Notification> notifications = notificationDao.getAll();
+        for (Notification notif : notifications) {
+            if(notif.getDate().getTime() < System.currentTimeMillis()) {
+                ss1.add(notif.getTitle());
+                ss2.add(notif.getDescription());
+            }
+        }
+
     }
 }

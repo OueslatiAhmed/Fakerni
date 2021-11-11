@@ -10,15 +10,22 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Date;
+import java.util.List;
+
+import tn.esprit.fakerni.Dao.NotificationDao;
 import tn.esprit.fakerni.Entity.Notification;
 import tn.esprit.fakerni.R;
+import tn.esprit.fakerni.Util.AppDatabase;
 import tn.esprit.fakerni.Util.ReminderBroadcast;
 
 /**
@@ -28,6 +35,7 @@ import tn.esprit.fakerni.Util.ReminderBroadcast;
  */
 public class AddFragment extends Fragment {
     Button button;
+    AppDatabase db;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,21 +83,28 @@ public class AddFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add, container, false);
         createNotificationChannel(v.getContext());
+        db = Room.databaseBuilder(v.getContext().getApplicationContext(),
+                AppDatabase.class, "database-name").allowMainThreadQueries().build();
+        NotificationDao notificationDao = db.notificationDao();
 
         button = v.findViewById(R.id.btnTest);
         button.setOnClickListener(v1 -> {
             Toast.makeText(v.getContext(), "Reminder set", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getActivity(), ReminderBroadcast.class);
+            Notification notification = new Notification();
+            notification.setDate(new Date());
+            notification.setTitle("Test");
+            notification.setDescription("Test");
+            int notificationId = (int) notificationDao.insert(notification);
+            intent.putExtra("NOTIFICATION_ID", notificationId);
+            intent.putExtra("CONTENT_TITLE", notification.getTitle());
+            intent.putExtra("CONTENT_TEXT", notification.getDate());
             PendingIntent pendingIntent = PendingIntent.getBroadcast(v.getContext(), 0, intent, 0);
 
             AlarmManager alarmManager = (AlarmManager) v.getContext().getSystemService(Context.ALARM_SERVICE);
 
-            long time0 = System.currentTimeMillis();
-
-            long time = 1000;
-
-            alarmManager.set(AlarmManager.RTC_WAKEUP, time0 + time, pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, notification.getDate().getTime()+1000, pendingIntent);
         });
         return v;
     }

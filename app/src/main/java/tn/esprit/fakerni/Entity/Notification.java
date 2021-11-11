@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class Notification {
@@ -17,8 +17,8 @@ public class Notification {
     @ColumnInfo(name = "description")
     private String description;
 
-//    @ColumnInfo(name = "date")
-//    private Date date;
+    @ColumnInfo(name = "date")
+    private Date date;
 
 
     public long getId() {
@@ -43,5 +43,13 @@ public class Notification {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

@@ -10,7 +10,7 @@ import tn.esprit.fakerni.Entity.Notification;
 
 @Dao
 public interface NotificationDao {
-    @Query("SELECT * FROM notification")
+    @Query("SELECT * FROM notification ORDER BY date DESC")
     List<Notification> getAll();
 
     @Insert

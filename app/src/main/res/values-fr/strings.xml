@@ -12,4 +12,16 @@
 
     <!-- security Preferences -->
     <string name="fingerprint_title">Empreinte digitale</string>
+
+    <!-- Biometric fingerprint -->
+    <string name="authentication_succeeded">Authentification réussie</string>
+    <string name="finger_title">Biometric login for my app</string>
+    <string name="finger_subtitle">Log in using your biometric credential</string>
+    <string name="finger_negative">Fermer</string>
+
+    <!-- Biometric fingerprint -->
+    <string name="level_urgent">Urgent</string>
+    <string name="level_high">Haut</string>
+    <string name="level_low">Faible</string>
+
 </resources>

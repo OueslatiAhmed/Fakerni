@@ -3,6 +3,7 @@ package tn.esprit.fakerni.Controller;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tn.esprit.fakerni.Dao.ToDoDao;
+import tn.esprit.fakerni.Entity.ToDo;
 import tn.esprit.fakerni.R;
+import tn.esprit.fakerni.Util.AppDatabase;
 import tn.esprit.fakerni.Util.MyExpandableListAdapter;
 
 /**
@@ -25,6 +29,8 @@ import tn.esprit.fakerni.Util.MyExpandableListAdapter;
  * create an instance of this fragment.
  */
 public class HomePageFragment extends Fragment {
+
+    AppDatabase db;
 
     List<String> groupList;
     List<String> childList;
@@ -77,6 +83,9 @@ public class HomePageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home_page, container, false);
+        db = Room.databaseBuilder(v.getContext().getApplicationContext(),
+                AppDatabase.class, "database-name").allowMainThreadQueries().build();
+
         createGroupList();
         createCollection();
         expandableListView = v.findViewById(R.id.expList);
@@ -105,11 +114,24 @@ public class HomePageFragment extends Fragment {
     }
 
     private void createCollection() {
-        String[] urgent = {"Samsung Galaxy M21", "Samsung Galaxy F41",
-                "Samsung Galaxy M51", "Samsung Galaxy A50s"};
-        String[] high = {"Pixel 4 XL", "Pixel 3a", "Pixel 3 XL", "Pixel 3a XL",
-                "Pixel 2", "Pixel 3"};
-        String[] low = {"Redmi 9i", "Redmi Note 9 Pro Max", "Redmi Note 9 Pro"};
+        ToDoDao toDoDao = db.toDoDao();
+        List<String> list = new ArrayList<String>();
+        for (ToDo toDo : toDoDao.getAllUrgent()) {
+            list.add(toDo.getName());
+        }
+        String[] urgent = list.toArray(new String[0]);
+
+        list = new ArrayList<String>();
+        for (ToDo toDo : toDoDao.getAllHigh()) {
+            list.add(toDo.getName());
+        }
+        String[] high = list.toArray(new String[0]);
+
+        list = new ArrayList<String>();
+        for (ToDo toDo : toDoDao.getAllLow()) {
+            list.add(toDo.getName());
+        }
+        String[] low = list.toArray(new String[0]);
         taskCollection = new HashMap<String, List<String>>();
         for(String group : groupList){
             if (group.equals("Urgent")){

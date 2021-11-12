@@ -31,4 +31,12 @@
         <item>on</item>
         <item>off</item>
     </string-array>
+
+    <!-- Spinner Task -->
+    <string-array name="spinner_task">
+        <item>Faible</item>
+        <item>Haut</item>
+        <item>Urgent</item>
+    </string-array>
+
 </resources>

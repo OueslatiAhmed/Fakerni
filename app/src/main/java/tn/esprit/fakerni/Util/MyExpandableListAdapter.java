@@ -1,5 +1,10 @@
 package tn.esprit.fakerni.Util;
 
+import static tn.esprit.fakerni.R.color.high;
+import static tn.esprit.fakerni.R.color.low;
+import static tn.esprit.fakerni.R.color.urgent;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -66,6 +71,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
         String level = getGroup(i).toString();
@@ -77,13 +83,13 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         item.setTypeface(null, Typeface.BOLD);
         item.setText(level);
         if (level.equals("Urgent")) {
-            item.setTextColor(Color.RED);
+            item.setTextColor(urgent);
         }
         else if (level.equals("High")) {
-            item.setTextColor(Color.YELLOW);
+            item.setTextColor(high);
         }
         else if (level.equals("Low")) {
-            item.setTextColor(Color.BLUE);
+            item.setTextColor(low);
         }
         return view;
     }

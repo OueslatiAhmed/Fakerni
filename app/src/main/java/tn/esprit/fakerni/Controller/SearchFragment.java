@@ -10,10 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.appcompat.widget.SearchView;
+import androidx.room.Room;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import tn.esprit.fakerni.Dao.ToDoDao;
+import tn.esprit.fakerni.Entity.ToDo;
 import tn.esprit.fakerni.R;
+import tn.esprit.fakerni.Util.AppDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +26,8 @@ import tn.esprit.fakerni.R;
  * create an instance of this fragment.
  */
 public class SearchFragment extends Fragment {
+
+    AppDatabase db;
 
     SearchView mySearchView;
     ListView myList;
@@ -79,12 +86,14 @@ public class SearchFragment extends Fragment {
 
         list = new ArrayList<String>();
 
-        list.add("scarrraa");
-        list.add("bqkdqd");
-        list.add("ccakaks");
-        list.add("ewqeqkk");
-        list.add("eeeeqqss");
-        list.add("oqwejdadaskd jnj blqblqblq");
+        db = Room.databaseBuilder(v.getContext().getApplicationContext(),
+                AppDatabase.class, "database-name").allowMainThreadQueries().build();
+
+        ToDoDao toDoDao = db.toDoDao();
+        List<ToDo> toDoList = toDoDao.getAll();
+        for (ToDo toDo : toDoList) {
+            list.add(toDo.getName());
+        }
 
         adapter = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_list_item_1, list);
         myList.setAdapter(adapter);

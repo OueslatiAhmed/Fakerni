@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Fakerni</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Bonjour fragment vierge</string>
     <!-- Preference Titles -->
     <string name="general_header">Générale</string>
@@ -15,8 +15,8 @@
 
     <!-- Biometric fingerprint -->
     <string name="authentication_succeeded">Authentification réussie</string>
-    <string name="finger_title">Biometric login for my app</string>
-    <string name="finger_subtitle">Log in using your biometric credential</string>
+    <string name="finger_title">Connexion biométrique pour mon application</string>
+    <string name="finger_subtitle">Connectez-vous avec votre identifiant biométrique</string>
     <string name="finger_negative">Fermer</string>
 
     <!-- Biometric fingerprint -->
@@ -26,5 +26,19 @@
 
     <!-- Search Fragment -->
     <string name="query_hint">Cherche ici</string>
+
+    <!-- Add Fragment -->
+    <string name="task_added">Tâche ajoutée</string>
+    <string name="add_task">Ajouter une tâche</string>
+    <string name="task_name">Nom de la tâche</string>
+    <string name="task_level">Niveau de tâche</string>
+    <string name="task_notify">Tâche Notifier</string>
+    <string name="add_button">Ajouter</string>
+    <string name="task_string">Tâche</string>
+
+
+    <!-- Notification -->
+    <string name="notification_title">Notification de tâche</string>
+
 
 </resources>
